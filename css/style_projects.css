@@ -1,0 +1,183 @@
+/* ===== Projects Page Layout ===== */
+
+.projects-main {
+    padding-top: 120px; /* space for fixed nav */
+    padding-bottom: 60px;
+}
+
+/* Override global center alignment */
+.projects-main,
+.projects-main * {
+    text-align: left;
+}
+
+.projects-header {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+.projects-header h1 {
+    margin-top: 0;
+    font-size: min(2.6rem, 7vw);
+    text-align: center;
+}
+
+.projects-header p {
+    margin-top: 16px;
+    text-align: center;
+    color: #555a6a;
+    font-size: 0.98rem;
+}
+
+/* ===== Bento-style Grid ===== */
+
+.projects-grid {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+/* === Stable card layout: image slot + flexible overlay === */
+.project-card {
+    position: relative;
+    display: flex;               /* stack image and overlay vertically */
+    flex-direction: column;
+    border-radius: 22px;
+    overflow: hidden;            /* keeps rounded corners, hides overflow */
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    min-height: 340px;           /* optional: ensures consistent card height */
+}
+
+/* Make some cards taller for “bento” vibe if you want */
+.project-card:nth-child(2n) {
+    grid-row: span 1;
+}
+.project-card:nth-child(3n) {
+    grid-row: span 1;
+}
+
+/* fixed-size image slot so cards are uniform */
+.project-image {
+    flex: 0 0 220px;             /* change 220px -> 260px if you prefer taller images */
+    width: 100%;
+    overflow: hidden;
+    background: #ddd;            /* placeholder while image loads */
+    display: block;
+}
+
+/* image fills the slot and uses object-fit to crop reliably */
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* Overlay becomes flexible area; keep position:relative for pseudo element */
+.project-overlay {
+    position: relative;
+    flex: 1 1 auto;              /* takes remaining vertical space */
+    padding: 18px;
+    min-height: 120px;           /* ensures gradient / text area isn't tiny */
+    /* use a background that complements your design */
+    background: #181820;
+    overflow: visible;           /* allow pseudo to bleed if needed */
+}
+
+/* Layered radial gradient pseudo that won't be clipped by image */
+.project-overlay::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -30px;                  /* extend slightly upward for a smoother blend */
+    height: calc(100% + 60px);   /* extend above and below overlay */
+    background:
+      radial-gradient(circle at top left, rgba(255, 138, 0, 0.28), transparent 40%),
+      radial-gradient(circle at bottom right, rgba(229, 46, 113, 0.33), transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* make sure all overlay content sits above the pseudo element */
+.project-overlay > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* keep your tag/title/colors but ensure they layer above the gradient */
+.project-tag { 
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin-bottom: 10px;
+}
+
+.project-card:hover .project-tag {
+    background: linear-gradient(to right, #ff8a00, #e52e71);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.project-title {
+    font-size: 1.05rem;
+    margin: 0 0 8px;
+}
+
+.project-desc {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #d4d7e6;
+}
+
+/* Hover behaviors */
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.06);
+}
+
+/* ===== Responsive tweaks ===== */
+
+@media (max-width: 768px) {
+    .project-image img {
+        height: 200px;
+    }
+    .project-image { flex: 0 0 200px; }
+    .project-card { min-height: auto; } /* allow natural stacking on small screens */
+    .project-overlay { padding: 14px; min-height: 90px; }
+}
+
+@media (max-width: 600px) {
+    .projects-main {
+        padding-top: 110px;
+    }
+
+    .projects-grid {
+        gap: 18px;
+    }
+
+    .project-overlay {
+        padding: 14px 14px 16px;
+    }
+
+    .project-image { flex: 0 0 180px; }
+}
