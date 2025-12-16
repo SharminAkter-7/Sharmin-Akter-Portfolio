@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Base styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Footer styles -->
+    <link rel="stylesheet" href="../css/style_footer.css">
+    <!-- Project detail styles -->
+    <link rel="stylesheet" href="../css/style_project_detail.css">
+
+    <title>Project 3</title>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="active"><b>Sharmin Akter</b></a>
+        <!-- <a href="index.html">Home</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="about.html">About Me</a>
+        <a href="#contact-footer">Contact</a> -->
+    </nav>
+
+    <main class="project-main">
+        <!-- TOP CONTROLS: Prev (left) — Breadcrumb (center) — Next (right) -->
+        <div class="project-top-controls">
+
+        <!-- LEFT: Prev (or "Start") -->
+        <!-- Only include the <a> if you have a prev project; otherwise put Start text or non-linked -->
+        <div class="project-top-left">
+            <!-- example when you have a prev -->
+            <a href="../projects/project2.html" class="project-prev">← Previous</a>
+
+            <!-- if you don't have prev and want "Start" instead, use:
+            <span class="project-prev start">Start</span>
+            -->
+        </div>
+         <!-- RIGHT: Next (only include when exists) -->
+        <div class="project-top-right">
+            <!-- example when you have a next -->
+            <a href="../projects/project4.html" class="project-next">Next →</a>
+
+            <!-- if not present, simply omit the a (no HTML required) -->
+        </div>
+        </div>
+
+        <!-- Path / tree like structure -->
+        <div class="project-breadcrumb">
+            <span class="crumb-path">
+                <a href="../index.html">./home</a> /
+                <a href="../projects.html">projects</a> /
+                <span>project3</span>
+            </span>
+        </div>
+
+        <!-- Header block -->
+        <header class="project-header">
+            <h1>Project 3</h1>
+            <p class="project-meta">
+                <b>Course Code and Name:</b> MSJ11102: Communication Research <br>
+                <b>Project Name: </b>The Research on the Narcotics abuse of the University students in Bangladesh.  <br>
+                <!-- <b>Topic:</b> <br> -->
+                <b>Date of Submission/Project: </b>Fall 2019  <br> <br>
+                <b>Project Description:</b>
+                In this course, we were assigned to write a research proposal in a group of 5 members and our faculty asked for a topic on which we were willing to work. So, we came up with the topic ‘The Research on the Narcotics Abuse of University Students in Bangladesh.’ which is essential to our study. I and four of my friends did this project. Throughout this course, we learn how to write a research proposal, how to do sampling, how to select an audience, how to find research objectives, how to find a solution to the relevant problems in society and how to understand the research works. We also collected different types of sources from articles, newspapers and interviews. As I was very much related to the topic, I chose this topic to explore how drugs are practically affecting the mental and situational health of University students. So, I decided to start our proposal through the introduction part with an explanation of why we chose the topic and how resolving this can create important benefits in our lives. For my part, I generated the main idea and formatted the objectives, research questions, research background and significance. And the rest of the parts were equally divided among my four team members. <br> <br>
+                <b>Project Justification:</b>
+                Because more and younger people are using drugs in the current generation, university students are also becoming addicted at a higher rate than before. This increase is connected to the rise of technology, which makes it easier to access drugs. Since young people are the future, their drug misuse is a danger to any country. Therefore, the goal of this research proposal is to educate the general public and university students about this issue through a campaign that uses information gathered from various groups. <br> <br>
+                <b>Learnings and Outcomes:</b>
+                This course has taught me how to write a research proposal methodically and how important it is to have a precise and succinct topic or question for a title. I learned how important it is to use sampling strategies to select a particular set of people in order to improve survey implementation. I learned how to conduct surveys utilizing a variety of techniques, such as gathering numerical data and posing open-ended questions. I expanded my knowledge of various research procedures by learning about both qualitative (descriptive) and quantitative (numerical) approaches in research. I developed the ability to discern trustworthy information from reputable sources, guaranteeing the validity of the collected data. 
+            </p>
+        </header>
+        
+        <section id="project-sectionV-2" class="project-section project-pdf-section">
+            <h2 class="pdf-title">
+            <a href="../documents/project3.pdf" target="_blank" class="pdf-tag">View as PDF</a>
+            </h2>
+
+
+            <div id="pdf-container" class="pdf-container">
+                <div class="pdf-loading-global">Loading document…</div>
+            </div>
+        </section>
+
+        <!-- PDF.js from CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+        <script>
+        // Configure PDF.js worker
+        if (window['pdfjsLib']) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        }
+
+        const pdfUrl = "../documents/project3.pdf"; // pdf location
+        const container = document.getElementById("pdf-container");
+
+        let pdfDoc = null;
+        let pageShells = [];
+
+        // Create skeleton placeholders for each page
+        function createPageShells(totalPages) {
+            container.innerHTML = ""; // remove "Loading document..." text
+
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+            const shell = document.createElement("div");
+            shell.className = "pdf-page-shell";
+            shell.dataset.pageNumber = pageNum;
+            shell.dataset.rendered = "false";
+
+            shell.innerHTML = `
+                <div class="pdf-skeleton">
+                <div class="pdf-skeleton-header"></div>
+                <div class="pdf-skeleton-body"></div>
+                </div>
+            `;
+
+            container.appendChild(shell);
+            pageShells.push(shell);
+            }
+        }
+
+        // Render a single page into its shell
+        function renderPage(pageNum, shell) {
+            // Prevent double-render
+            if (shell.dataset.rendered === "true") return;
+
+            pdfDoc.getPage(pageNum).then(function (page) {
+            const scale = 1.4; // zoom level (1.2–1.5 looks good)
+            const viewport = page.getViewport({ scale });
+
+            const canvas = document.createElement("canvas");
+            canvas.className = "pdf-page-canvas";
+            const context = canvas.getContext("2d");
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+
+            // Keep skeleton until render completes
+            page.render(renderContext).promise.then(function () {
+                shell.innerHTML = ""; // remove skeleton
+                shell.appendChild(canvas);
+                shell.dataset.rendered = "true";
+            });
+            }).catch(function (err) {
+            console.error("Error rendering page", pageNum, err);
+            shell.innerHTML = "<p class='pdf-error'>Failed to load this page.</p>";
+            });
+        }
+
+        // Lazy load pages near the viewport
+        function checkVisiblePages() {
+            const viewportHeight = window.innerHeight;
+
+            pageShells.forEach(shell => {
+            const rect = shell.getBoundingClientRect();
+
+            // Only render if page is within some range around viewport
+            const buffer = viewportHeight * 1.5; // 1.5x screen above/below
+            const isNearViewport = rect.top < buffer && rect.bottom > -buffer;
+
+            if (isNearViewport && shell.dataset.rendered === "false") {
+                const pageNum = parseInt(shell.dataset.pageNumber, 10);
+                renderPage(pageNum, shell);
+            }
+            });
+        }
+
+        // Throttle scroll handler a bit using requestAnimationFrame
+        let scrollScheduled = false;
+        function onScroll() {
+            if (!scrollScheduled) {
+            scrollScheduled = true;
+            window.requestAnimationFrame(() => {
+                checkVisiblePages();
+                scrollScheduled = false;
+            });
+            }
+        }
+
+        // Load PDF
+        pdfjsLib.getDocument(pdfUrl).promise.then(function (pdf) {
+            pdfDoc = pdf;
+
+            // Create shells for all pages
+            createPageShells(pdf.numPages);
+
+            // Initial check (for pages already in view)
+            checkVisiblePages();
+
+            // Listen to scroll and resize
+            window.addEventListener("scroll", onScroll);
+            window.addEventListener("resize", onScroll);
+        }).catch(function (err) {
+            console.error("PDF load error:", err);
+            container.innerHTML = "<p class='pdf-error'>Unable to load PDF.</p>";
+        });
+        </script>
+
+
+        <!-- Back link -->
+        <div class="project-backlink">
+            <a href="../projects.html">← Back to all projects</a>
+        </div>
+
+        <!-- Footer -->
+        <footer id="contact" class="new_footer_area bg_color">
+            <!-- reuse your footer HTML here -->
+        </footer>
+    </main>
+
+   <!-- Scroll to top button -->
+<button id="scrollTopBtn" aria-label="Scroll to top" title="Back to top">
+  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</button>
+
+
+<script>
+(function() {
+  // threshold element: when we scroll past this element (the header), show the button
+  const thresholdEl = document.querySelector('.project-header') || document.querySelector('.project-top-controls');
+  const scrollBtn = document.getElementById('scrollTopBtn');
+
+  // safety: if button not exist, do nothing
+  if (!scrollBtn) return;
+
+  // check scroll position relative to threshold element
+  function checkScroll() {
+    if (!thresholdEl) {
+      // fallback: show after 400px
+      if (window.scrollY > 400) scrollBtn.classList.add('show');
+      else scrollBtn.classList.remove('show');
+      return;
+    }
+
+    const rect = thresholdEl.getBoundingClientRect();
+    // when bottom of the threshold element is above the top of viewport => we've scrolled past it
+    if (rect.bottom < 0) scrollBtn.classList.add('show');
+    else scrollBtn.classList.remove('show');
+  }
+
+  // smooth scroll to top on click
+  scrollBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // listen to scroll/resize
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  window.addEventListener('resize', checkScroll);
+  // run once
+  checkScroll();
+})();
+</script>
+
+</body>
+</html>
